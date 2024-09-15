@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaidエディタ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #editor {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border-right: 2px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #output {
+            width: 50%;
+            padding: 10px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .mermaid {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="editor" placeholder="ここにMermaidの記述を入力してください">
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+    </textarea>
+    <div id="output"></div>
+
+    <!-- JavaScriptはページの最後にロードする -->
+    <script type="module">
+
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            mermaid.initialize({ startOnLoad: true });
+
+            async function updateDiagram() {
+
+                const editorContent = document.getElementById("editor").value;
+                const outputDiv = document.getElementById("output");
+
+                console.log('editorContent');
+                console.log(editorContent);
+                
+                // Mermaidの描画関数を使って内容をレンダリング
+                const result = await mermaid.render('theGraph', editorContent, undefined, outputDiv);
+                const svg = result.svg;
+                outputDiv.innerHTML = svg;
+
+            }
+
+            const editor = document.getElementById("editor");
+            editor.addEventListener('input', updateDiagram);
+            updateDiagram();
+
+        });
+        
+    </script>
+</body>
+</html>
