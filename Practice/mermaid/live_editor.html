@@ -8,8 +8,26 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
+        }
+
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #content {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         #editor {
@@ -32,16 +50,26 @@
             padding: 10px;
         }
     </style>
+
 </head>
 <body>
-    <textarea id="editor" placeholder="ここにMermaidの記述を入力してください">
-graph LR
-    A[Square Rect] -- Link text --> B((Circle))
-    A --> C(Round Rect)
-    B --> D{Rhombus}
-    C --> D
-    </textarea>
-    <div id="output"></div>
+    
+
+    <div id="header">
+        <button id="exportBtn">エクスポート</button>
+    </div>
+
+    <div id="content">
+        <textarea id="editor" placeholder="ここにMermaidの記述を入力してください">
+            graph LR
+                A[Square Rect] -- Link text --> B((Circle))
+                A --> C(Round Rect)
+                B --> D{Rhombus}
+                C --> D
+            </textarea>
+        <div id="output"></div>
+    </div>
+
 
     <!-- JavaScriptはページの最後にロードする -->
     <script type="module">
@@ -78,6 +106,23 @@ graph LR
             const editor = document.getElementById("editor");
             editor.addEventListener('input', updateDiagram);
             updateDiagram();
+
+            // エクスポートボタンの動作を定義
+            const exportBtn = document.getElementById("exportBtn");
+            exportBtn.addEventListener('click', function() {
+                const editorContent = document.getElementById("editor").value;
+                const blob = new Blob([editorContent], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+
+                // ダウンロードリンクを作成して自動的にクリック
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'diagram.md';
+                a.click();
+
+                // リソースを解放
+                URL.revokeObjectURL(url);
+            });
 
         });
         
