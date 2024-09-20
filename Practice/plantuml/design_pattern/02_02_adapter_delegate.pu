@@ -21,7 +21,7 @@ class Banner {
 }
 
 Main -down-> Print : Uses▶︎
-Print <|.right. PrintBanner
+Print <|-right- PrintBanner
 PrintBanner o-right-> Banner
 
 @enduml
