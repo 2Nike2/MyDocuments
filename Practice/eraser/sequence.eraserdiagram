@@ -1,0 +1,4 @@
+sequence-diagram
+
+Alice[icon: user] > Bob[icon: user] : Hello, how are you?
+Bob[icon: user] > Alice[icon: user] : Fine, thank you.
