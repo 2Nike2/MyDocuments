@@ -1,0 +1,32 @@
+@startuml
+
+abstract class AbstractDisplay {
+    open()
+    print()
+    close()
+    display()
+}
+
+class CharDisplay {
+    open()
+    print()
+    close()
+}
+
+class StringDisplay {
+    open()
+    print()
+    close()
+    printLine()
+}
+
+note "open(), print(), close() は抽象メソッドで, display() でそれを用いている。" as ASN
+note "printLine() は open() と close() の中で使用している。" as SDN
+
+AbstractDisplay <|-down- CharDisplay
+AbstractDisplay <|-down- StringDisplay
+
+AbstractDisplay .right. ASN
+StringDisplay .right. SDN
+
+@enduml
