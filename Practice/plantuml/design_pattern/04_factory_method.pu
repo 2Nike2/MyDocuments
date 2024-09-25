@@ -36,8 +36,8 @@ package idcard {
 
 }
 
-Factory <-down- IDCardFactory
-Product <-down- IDCard
+Factory <|-down- IDCardFactory
+Product <|-down- IDCard
 
 
 @enduml
