@@ -1,0 +1,62 @@
+@startuml
+
+package factory {
+  class Factory {
+    {static}getFactory()
+    createLink()
+    createTray()
+    createPage()
+  }
+  class Link {
+    url
+    makeHTML()
+  }
+  class Tray {
+    tray
+    add()
+    makeHTML()
+  }
+  class Item {
+    caption
+    makeHTML()
+  }
+  class Page {
+    title
+    author
+    add()
+    output()
+    makeHTML()
+  }
+  Factory -u-> Link : Create▶︎
+  Factory -u-> Tray : Create▶︎
+  Factory -u-> Page : Create▶︎
+  Link -u-|>Item
+  Tray -u-|>Item
+  Tray o-u|>Item
+}
+
+package listfactory {
+  class ListFactory {
+    createLink()
+    createTray()
+    createPage()
+  }
+  class ListLink {
+    makeHTML()
+  }
+  class ListTray {
+    makeHTML()
+  }
+  class ListPage {
+    makeHTML
+  }
+  ListFactory -u-> ListLink : Create▶︎
+  ListFactory -u-> ListTray : Create▶︎
+  ListFactory -u-> ListPage : Create▶︎
+}
+
+ListLink -u-|> Link
+ListTray -u-|> Tray
+ListPage -u-|> Page
+
+@enduml
