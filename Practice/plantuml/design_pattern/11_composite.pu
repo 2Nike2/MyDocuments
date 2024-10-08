@@ -1,0 +1,31 @@
+@startuml
+
+class Entry {
+  getName()
+  getSize()
+  printList()
+  add()
+}
+
+class File {
+  name
+  size
+  getname()
+  getSize()
+  printList()
+}
+
+class Directory {
+  name
+  directory
+  getName()
+  getSize()
+  printList()
+  add()
+}
+
+Entry <|-d- File
+Entry <|-d- Directory
+Entry <-d-o Directory
+
+@enduml
