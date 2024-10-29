@@ -1,0 +1,41 @@
+@startuml
+
+class Display {
+  getColumns()
+  getRows()
+  getRowText()
+  show()
+}
+
+class StringDisplay {
+  string
+  getColumns()
+  getRows()
+  getRowText()
+}
+
+class Border {
+  Display
+}
+
+class SideBorder {
+  borderChar
+  getColumns()
+  getRows()
+  getRowText()
+}
+
+class FullBorder {
+  getColumns()
+  getRows()
+  getRowText()
+  makeLine()
+}
+
+Display <|-d- StringDisplay
+Display <|-d- Border
+Border <|-d- SideBorder
+Border <|-d- FullBorder
+Border o-u-> Display
+
+@enduml
