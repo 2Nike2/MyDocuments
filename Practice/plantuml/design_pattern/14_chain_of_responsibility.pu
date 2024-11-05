@@ -1,0 +1,39 @@
+@startuml
+
+class Main {
+}
+
+class Support {
+  -name
+  -next
+  +support()
+  +setNext()
+  #resolve()
+}
+
+class NoSupport {
+  #resolve()
+}
+
+class LimitSupport {
+  -limit
+  #resolve()
+}
+
+class OddSupport {
+  #resolve()
+}
+
+class SpecialSupport {
+  -number
+  #resolve()
+}
+
+Main -r-> Support : Request▶︎
+Support <|-d- NoSupport
+Support <|-d- LimitSupport
+Support <|-d- OddSupport
+Support <|-d- SpecialSupport
+Support <-o Support
+
+@enduml
