@@ -1,0 +1,31 @@
+@startuml
+
+class Main {
+}
+
+class Gamer {
+  -money
+  -fruits
+  -random
+  -fruitsname
+  +getMoney
+  +bet
+  +createMemento
+  +restoreMemento
+  +toString
+  -getFruit
+}
+
+class Memento {
+  ~money
+  ~fruits
+  +getMoney
+  ~Memento
+  ~addFruit
+}
+
+Main -r-> Gamer : Requests▶️
+Gamer -d-> Memento : Creates▶️
+Main o-d-> Memento
+
+@enduml
