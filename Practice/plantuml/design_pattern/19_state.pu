@@ -1,0 +1,50 @@
+@startuml
+
+interface Context {
+  setClock()
+  changeState()
+  callSecurityCenter()
+  recordLog()
+}
+
+class SafeFrame {
+  -state
+  setClock()
+  changeState()
+  callSecurityCenter()
+  recordLog()
+}
+
+interface State{
+  doClock()
+  doUse()
+  doAlarm()
+  doPhone()
+}
+
+class DayState{
+  -singleton
+  -DayState()
+  getInstance()
+  doClock()
+  doUse()
+  doAlarm()
+  doPhone()
+}
+
+class NightState{
+  -singleton
+  -NightState()
+  getInstance()
+  doClock()
+  doUse()
+  doAlarm()
+  doPhone()
+}
+
+Context <|-d- SafeFrame
+SafeFrame o-r-> State
+State <|.d. DayState
+State <|.d. NightState
+
+@enduml
