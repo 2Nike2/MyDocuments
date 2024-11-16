@@ -1,0 +1,34 @@
+@startuml
+
+class Main {
+}
+
+interface Printable {
+  setPrinterName()
+  getPrinterName()
+  print()
+}
+
+class PrinterProxy {
+  -name
+  -real
+  setPrinterName()
+  getPrinterName()
+  print()
+  realize()
+}
+
+class Printer {
+  -name
+  setPrinterName()
+  getPrinterName()
+  print()
+  -heavyJob()
+}
+
+Printable <|.d. PrinterProxy
+Printable <|.d. Printer
+Main -r->PrinterProxy : Uses▶︎
+PrinterProxy o-r->Printer : Uses▶︎
+
+@enduml
