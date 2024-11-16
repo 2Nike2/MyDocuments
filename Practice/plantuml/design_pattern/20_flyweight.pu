@@ -1,0 +1,31 @@
+@startuml
+
+class BigChar {
+  -charname
+  -fontdata
+  print()
+}
+
+class BigCharFactory {
+  -pool
+  -singleton
+  -BigCharFactory()
+  getInstance()
+  getBigChar()
+}
+
+class BigString {
+  -bigchars
+  print()
+}
+
+class Main {
+
+}
+
+BigChar <-d-o BigCharFactory : Creates▲
+BigCharFactory <-d- BigString : Uses▲
+BigString o-u-> BigChar : Uses▲
+BigString <-r- Main : ◀︎Uses
+
+@enduml
